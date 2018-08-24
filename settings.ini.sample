@@ -1,0 +1,10 @@
+# OpenWeatherMap
+[owm]
+owm_id = <OWM API KEY>
+owm_city_id = <OWM CITY ID>
+
+# Nest
+[nest]
+client_id = <NEST CLIENT ID>
+client_secret = <NEST CLIENT SECRET>
+access_token_cache_file = account.json

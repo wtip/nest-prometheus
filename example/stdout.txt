@@ -1,0 +1,5 @@
+$ python metrics.py
+Nest API: 0.010s
+OpenWeatherMap API: 0.205s
+Listening on port 8000...
+1535072582.4324107 - Polling!

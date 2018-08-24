@@ -1,0 +1,55 @@
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 109223936.0
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 29749248.0
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1535072445.79
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 0.43
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 7.0
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1048576.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="3",minor="7",patchlevel="0",version="3.7.0"} 1.0
+# HELP is_online Device connection status with the Nest service
+# TYPE is_online gauge
+is_online{device="Living Room",structure="Casa"} 1.0
+# HELP has_leaf Displayed when the thermostat is set to an energy-saving temperature
+# TYPE has_leaf gauge
+has_leaf{device="Living Room",structure="Casa"} 1.0
+# HELP target_temp Desired temperature, in half degrees Celsius (0.5°C)
+# TYPE target_temp gauge
+target_temp{device="Living Room",structure="Casa"} 19.0
+# HELP current_temp Temperature, measured at the device, in half degrees Celsius (0.5°C)
+# TYPE current_temp gauge
+current_temp{device="Living Room",structure="Casa"} 27.5
+# HELP humidity Humidity, in percent (%) format, measured at the device, rounded to the nearest 5%
+# TYPE humidity gauge
+humidity{device="Living Room",structure="Casa"} 50.0
+# HELP state Indicates whether HVAC system is actively heating, cooling or is off. Use this value to indicate HVAC activity state
+# TYPE state gauge
+state{device="Living Room",structure="Casa"} 0.0
+# HELP mode Indicates HVAC system heating/cooling modes, like Heat•Cool for systems with heating and cooling capacity, or Eco Temperatures for energy savings
+# TYPE mode gauge
+mode{device="Living Room",structure="Casa"} 0.0
+# HELP time_to_target The time, in minutes, that it will take for the structure to reach the target temperature
+# TYPE time_to_target gauge
+time_to_target{device="Living Room",structure="Casa"} 0.0
+# HELP weather_current_temp Current temperature, in Celsius
+# TYPE weather_current_temp gauge
+weather_current_temp{city="Barcelona"} 22.5
+# HELP weather_current_humidity Current humidity, in percent (%)
+# TYPE weather_current_humidity gauge
+weather_current_humidity{city="Barcelona"} 83.0
+# HELP request_processing_seconds Time spent processing request
+# TYPE request_processing_seconds summary
+request_processing_seconds_count 1.0
+request_processing_seconds_sum 1.1796493000001647
