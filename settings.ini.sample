@@ -1,7 +1,7 @@
-# OpenWeatherMap
-[owm]
-owm_id = <OWM API KEY>
-owm_city_id = <OWM CITY ID>
+# General
+[general]
+port = 8000
+polling_interval = 60
 
 # Nest
 [nest]

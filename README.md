@@ -1,8 +1,6 @@
-# Prometheus client for Nest API
+# Prometheus Exporter for Nest API
 
-This is a client application which fetches
-- the current state of my Nest thermostat
-- the current weather conditions, based on the OpenWeatherMap API
+This is application fetches metrics from the Nest Thermostat api using the [python-nest](https://github.com/jkoelker/python-nest) library and exposes them using the [prometheus_client](https://github.com/prometheus/client_python) library.
 
 See `example/` folder for example outputs.
 
