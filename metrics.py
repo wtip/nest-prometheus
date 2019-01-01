@@ -8,6 +8,7 @@ import nest
 
 # Gauges
 g = {
+  'away': Gauge('nest_thermostat_away', 'Away status for entire structure (1=away 0=home 2=unkown)', ['structure']),
   'is_online': Gauge('nest_thermostat_is_online', 'Device connection status with the Nest service', ['structure', 'device']),
   'has_leaf': Gauge('nest_thermostat_has_leaf', 'Displayed when the thermostat is set to an energy-saving temperature', ['structure', 'device']),
   'target_temp': Gauge('nest_thermostat_target_temp', 'Desired temperature, in half degrees Celsius (0.5°C)', ['structure', 'device']),
@@ -27,6 +28,7 @@ def polling(napi):
     print("%s - Polling!" % time.time())
 
     for structure in napi.structures:
+        g['away'].labels(structure.name).set((1 if structure.away == "away" else 0 if structure.away == "home" else 2))
         for device in structure.thermostats:
             g['is_online'].labels(structure.name, device.name).set(device.online)
             g['has_leaf'].labels(structure.name, device.name).set(device.has_leaf)
