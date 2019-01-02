@@ -1,4 +1,4 @@
-from prometheus_client import start_http_server, Summary, Gauge
+from prometheus_client import start_http_server, Summary, Gauge, Counter
 import configparser
 import os
 import time
@@ -20,24 +20,26 @@ g = {
   
 }
 
-# Create a metric to track time spent and requests made.
+# Create a metric to track time spent and requests made and exceptions
 REQUEST_TIME = Summary('request_processing_seconds', 'Time spent processing request')
+REQUEST_EXCEPTIONS = Counter('nest_api_request_exceptions_total', 'Exceptions thrown while calling Nest API')
+
 # Decorate function with metric.
-@REQUEST_TIME.time()
 def polling(napi):
     print("%s - Polling!" % time.time())
-
-    for structure in napi.structures:
-        g['away'].labels(structure.name).set((1 if structure.away == "away" else 0 if structure.away == "home" else 2))
-        for device in structure.thermostats:
-            g['is_online'].labels(structure.name, device.name).set(device.online)
-            g['has_leaf'].labels(structure.name, device.name).set(device.has_leaf)
-            g['target_temp'].labels(structure.name, device.name).set(device.target)
-            g['current_temp'].labels(structure.name, device.name).set(device.temperature)
-            g['humidity'].labels(structure.name, device.name).set(device.humidity)
-            g['state'].labels(structure.name, device.name).set((0 if device.hvac_state == "off" else 1))
-            g['mode'].labels(structure.name, device.name).set((0 if device.mode == "off" else 1))
-            g['time_to_target'].labels(structure.name, device.name).set(''.join(x for x in device.time_to_target if x.isdigit()))
+    with REQUEST_TIME.time():
+      with REQUEST_EXCEPTIONS.count_exceptions():
+        for structure in napi.structures:
+            g['away'].labels(structure.name).set((1 if structure.away == "away" else 0 if structure.away == "home" else 2))
+            for device in structure.thermostats:
+                g['is_online'].labels(structure.name, device.name).set(device.online)
+                g['has_leaf'].labels(structure.name, device.name).set(device.has_leaf)
+                g['target_temp'].labels(structure.name, device.name).set(device.target)
+                g['current_temp'].labels(structure.name, device.name).set(device.temperature)
+                g['humidity'].labels(structure.name, device.name).set(device.humidity)
+                g['state'].labels(structure.name, device.name).set((0 if device.hvac_state == "off" else 1))
+                g['mode'].labels(structure.name, device.name).set((0 if device.mode == "off" else 1))
+                g['time_to_target'].labels(structure.name, device.name).set(''.join(x for x in device.time_to_target if x.isdigit()))
 
 
 if __name__ == '__main__':
